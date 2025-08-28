@@ -1,171 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery - St. Mary’s Jacobite Syrian Orthodox Church</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Lightbox overlay */
-    #lightbox-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    #lightbox-overlay img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 1rem;
-    }
-    #lightbox-overlay span {
-      position: absolute;
-      top: 2rem; right: 2rem;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery - St. Mary’s Church</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .active-tab { @apply bg-blue-700 text-white; }
+  .nav-btn {
+    @apply absolute top-1/2 -translate-y-1/2 text-white text-4xl px-4 cursor-pointer select-none;
+  }
+</style>
 </head>
 <body class="font-sans text-gray-800">
 
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md fixed w-full top-0 left-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <!-- Logo -->
-        <div class="flex items-center space-x-3">
-          <a href="index.html" class="flex items-center">
-            <img src="/Home/LOGO PNG.png" alt="Church Logo" class="h-12 w-auto">
-            <span class="ml-2 text-lg font-bold text-blue-800">St. Mary’s Jacobite Syrian Orthodox Church</span>
-          </a>
-        </div>
-
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-8">
-          <a href="index.html" class="text-gray-700 hover:text-blue-700 font-medium">Home</a>
-          <a href="about.html" class="text-gray-700 hover:text-blue-700 font-medium">About</a>
-          <a href="ministries.html" class="text-gray-700 hover:text-blue-700 font-medium">Ministries</a>
-          <a href="gallery.html" class="text-blue-700 font-semibold">Gallery</a>
-          <a href="events.html" class="text-gray-700 hover:text-blue-700 font-medium">Events</a>
-          <a href="contact.html" class="text-gray-700 hover:text-blue-700 font-medium">Contact</a>
-        </div>
-
-        <!-- Mobile Hamburger -->
-        <button class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-               viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
+<!-- Navbar -->
+<nav class="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center">
+          <img src="/Home/LOGO PNG.png" alt="Church Logo" class="h-12 w-auto">
+          <span class="ml-2 text-lg font-bold text-blue-800">St. Mary’s Church</span>
+        </a>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="index.html" class="text-gray-700 hover:text-blue-700 font-medium">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-blue-700 font-medium">About</a>
+        <a href="ministries.html" class="text-gray-700 hover:text-blue-700 font-medium">Ministries</a>
+        <a href="gallery.html" class="text-blue-700 font-semibold">Gallery</a>
+        <a href="events.html" class="text-gray-700 hover:text-blue-700 font-medium">Events</a>
+        <a href="contact.html" class="text-gray-700 hover:text-blue-700 font-medium">Contact</a>
       </div>
     </div>
+  </div>
+</nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow">
-      <a href="index.html" class="block px-4 py-2 hover:bg-blue-50">Home</a>
-      <a href="about.html" class="block px-4 py-2 hover:bg-blue-50">About</a>
-      <a href="ministries.html" class="block px-4 py-2 hover:bg-blue-50">Ministries</a>
-      <a href="gallery.html" class="block px-4 py-2 hover:bg-blue-50">Gallery</a>
-      <a href="events.html" class="block px-4 py-2 hover:bg-blue-50">Events</a>
-      <a href="contact.html" class="block px-4 py-2 hover:bg-blue-50">Contact</a>
-    </div>
-  </nav>
+<!-- Hero Section -->
+<header class="relative mt-16 h-[60vh] flex items-center justify-center bg-gray-900 text-white">
+  <img src="/Home/church-bg.jpeg" alt="Church" class="absolute inset-0 w-full h-full object-cover opacity-30">
+  <div class="absolute inset-0 bg-black/30"></div>
+  <div class="relative z-10 text-center px-4 sm:px-6">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Gallery</h1>
+    <p class="mt-4 text-base sm:text-lg md:text-xl">Photos and videos from church events and activities</p>
+  </div>
+</header>
 
-  <!-- Hero Section -->
-  <header class="relative mt-16 h-[60vh] sm:h-[50vh] flex items-center justify-center bg-gray-900 text-white">
-    <img src="/Home/church-bg.jpeg" alt="Church" class="absolute inset-0 w-full h-full object-cover opacity-30">
-    <div class="absolute inset-0 bg-black/30"></div>
-    <div class="relative z-10 text-center px-4 sm:px-6">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Gallery</h1>
-      <p class="mt-4 text-base sm:text-lg md:text-xl">Browse photos from our church activities and events</p>
-    </div>
-  </header>
-
-  <!-- Categories -->
-  <section class="max-w-6xl mx-auto py-12 px-4 sm:px-6">
-    <div class="flex flex-wrap justify-center gap-3 mb-8">
-      <button class="filter-btn bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-800 transition" data-filter="all">All</button>
-      <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition" data-filter="general">General</button>
-      <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition" data-filter="youth">Syrian Youth</button>
-      <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition" data-filter="sundayschool">Sunday School</button>
-      <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition" data-filter="vanita">Vanita Samajam</button>
-      <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition" data-filter="events">Events</button>
-    </div>
-
-    <!-- Gallery Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <!-- Sample Images -->
-      <div class="gallery-item general overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-        <img src="/Home/gallery1.jpeg" alt="General Photo 1" class="w-full h-64 object-cover">
-      </div>
-      <div class="gallery-item youth overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-        <img src="/Home/gallery2.jpeg" alt="Syrian Youth 1" class="w-full h-64 object-cover">
-      </div>
-      <div class="gallery-item sundayschool overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-        <img src="/Home/gallery3.jpeg" alt="Sunday School 1" class="w-full h-64 object-cover">
-      </div>
-      <div class="gallery-item vanita overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-        <img src="/Home/gallery4.jpeg" alt="Vanita Samajam 1" class="w-full h-64 object-cover">
-      </div>
-      <div class="gallery-item events overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-        <img src="/Home/gallery5.jpeg" alt="Event 1" class="w-full h-64 object-cover">
-      </div>
-      <div class="gallery-item general overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-        <img src="/Home/gallery6.jpeg" alt="General Photo 2" class="w-full h-64 object-cover">
-      </div>
-    </div>
-  </section>
-
-  <!-- Lightbox -->
-  <div id="lightbox-overlay" class="flex">
-    <span onclick="document.getElementById('lightbox-overlay').style.display='none'">&times;</span>
-    <img src="" alt="Lightbox Image">
+<!-- Categories -->
+<section class="max-w-6xl mx-auto mt-12 px-4 sm:px-6">
+  <div class="flex flex-wrap justify-center gap-2 mb-6" id="category-tabs">
+    <button data-category="general" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700 active-tab">General</button>
+    <button data-category="youth" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Syrian Youth</button>
+    <button data-category="sundayschool" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Sunday School</button>
+    <button data-category="vanita" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Vanita Samajam</button>
+    <button data-category="eventwise" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Event-wise</button>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 py-6 mt-10 px-4 text-center text-sm sm:text-base">
-    <div class="max-w-6xl mx-auto">
-      <p>&copy; 2025 St. Mary’s Jacobite Syrian Orthodox Church. All Rights Reserved.</p>
-    </div>
-  </footer>
+  <!-- Year Select -->
+  <div class="text-center mb-8">
+    <label for="year-select" class="mr-2 font-semibold">Year:</label>
+    <select id="year-select" class="border border-gray-300 rounded px-3 py-2">
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+      <option value="2023">2023</option>
+    </select>
+  </div>
 
-  <!-- Scripts -->
-  <script>
-    // Filter gallery items
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const galleryItems = document.querySelectorAll(".gallery-item");
+  <!-- Gallery Grid -->
+  <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <!-- Images/videos will appear here -->
+  </div>
+</section>
 
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const filter = btn.dataset.filter;
+<!-- Lightbox Modal -->
+<div id="lightbox" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+  <span id="close-lightbox" class="absolute top-5 right-8 text-white text-3xl cursor-pointer">&times;</span>
+  <span id="prev-btn" class="nav-btn left-5">&#10094;</span>
+  <span id="next-btn" class="nav-btn right-5">&#10095;</span>
+  <div id="lightbox-content" class="max-w-4xl max-h-[90vh]"></div>
+</div>
 
-        galleryItems.forEach(item => {
-          if(filter === "all" || item.classList.contains(filter)){
-            item.classList.remove("hidden");
-          } else {
-            item.classList.add("hidden");
-          }
-        });
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-6 mt-10 text-center">
+  <p>&copy; 2025 St. Mary’s Church. All Rights Reserved.</p>
+</footer>
 
-        filterButtons.forEach(b => b.classList.remove("bg-blue-700", "text-white"));
-        btn.classList.add("bg-blue-700", "text-white");
-      });
+<script>
+  // Sample media data
+  const mediaData = [
+    {year:'2025', category:'general', type:'image', src:'/Gallery/2025/general/img1.jpeg'},
+    {year:'2025', category:'youth', type:'video', src:'/Gallery/2025/youth/youth1.mp4'},
+    {year:'2025', category:'sundayschool', type:'image', src:'/Gallery/2025/sundayschool/ss1.jpeg'},
+    {year:'2025', category:'vanita', type:'image', src:'/Gallery/2025/vanita/vanita1.jpeg'},
+    {year:'2025', category:'eventwise', type:'image', src:'/Gallery/2025/eventwise/event1.jpeg'},
+    {year:'2024', category:'general', type:'image', src:'/Gallery/2024/general/img2.jpeg'},
+  ];
+
+  const galleryGrid = document.getElementById('gallery-grid');
+  const categoryTabs = document.querySelectorAll('#category-tabs button');
+  const yearSelect = document.getElementById('year-select');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxContent = document.getElementById('lightbox-content');
+  const closeLightbox = document.getElementById('close-lightbox');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  let currentIndex = 0;
+  let currentFiltered = [];
+
+  function displayGallery(year, category) {
+    galleryGrid.innerHTML = '';
+    currentFiltered = mediaData.filter(m => m.year === year && m.category === category);
+    currentFiltered.forEach((m, index) => {
+      if(m.type === 'image') {
+        galleryGrid.innerHTML += `<img src="${m.src}" class="w-full rounded-lg shadow-lg cursor-pointer" onclick="openLightbox(${index})">`;
+      } else {
+        galleryGrid.innerHTML += `<video controls class="w-full rounded-lg shadow-lg cursor-pointer" onclick="openLightbox(${index})"><source src="${m.src}" type="video/mp4"></video>`;
+      }
     });
+  }
 
-    // Lightbox functionality
-    galleryItems.forEach(item => {
-      item.addEventListener("click", () => {
-        const src = item.querySelector("img").src;
-        const lightbox = document.getElementById("lightbox-overlay");
-        lightbox.style.display = "flex";
-        lightbox.querySelector("img").src = src;
-      });
-    });
-  </script>
+  function openLightbox(index) {
+    currentIndex = index;
+    showMedia();
+    lightbox.classList.remove('hidden');
+  }
+
+  function showMedia() {
+    const media = currentFiltered[currentIndex];
+    if(media.type === 'image') {
+      lightboxContent.innerHTML = `<img src="${media.src}" class="max-h-[90vh] mx-auto rounded-lg shadow-lg">`;
+    } else {
+      lightboxContent.innerHTML = `<video controls autoplay class="max-h-[90vh] mx-auto rounded-lg shadow-lg"><source src="${media.src}" type="video/mp4"></video>`;
+    }
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + currentFiltered.length) % currentFiltered.length;
+    showMedia();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % currentFiltered.length;
+    showMedia();
+  });
+
+  closeLightbox.addEventListener('click', () => {
+    lightbox.classList.add('hidden');
+    lightboxContent.innerHTML = '';
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) {
+      lightbox.classList.add('hidden');
+      lightboxContent.innerHTML = '';
+    }
+  });
+
+  // Tab click
+  categoryTabs.forEach(tab => tab.addEventListener('click', () => {
+    categoryTabs.forEach(t => t.classList.remove('active-tab'));
+    tab.classList.add('active-tab');
+    displayGallery(yearSelect.value, tab.dataset.category);
+  }));
+
+  // Year change
+  yearSelect.addEventListener('change', () => {
+    const activeTab = document.querySelector('#category-tabs button.active-tab');
+    displayGallery(yearSelect.value, activeTab.dataset.category);
+  });
+
+  // Initialize
+  displayGallery('2025', 'general');
+</script>
 </body>
 </html>
