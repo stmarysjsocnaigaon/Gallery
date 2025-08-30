@@ -1,177 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery - St. Mary’s Church</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  .active-tab { @apply bg-blue-700 text-white; }
-  .nav-btn {
-    @apply absolute top-1/2 -translate-y-1/2 text-white text-4xl px-4 cursor-pointer select-none;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Church Gallery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .active-tab {
+      background-color: #2563eb;
+      color: white;
+    }
+  </style>
 </head>
-<body class="font-sans text-gray-800">
+<body class="bg-gray-100">
 
-<!-- Navbar -->
-<nav class="bg-white shadow-md fixed w-full top-0 left-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <div class="flex items-center space-x-3">
-        <a href="index.html" class="flex items-center">
-          <img src="/Home/LOGO PNG.png" alt="Church Logo" class="h-12 w-auto">
-          <span class="ml-2 text-lg font-bold text-blue-800">St. Mary’s Church</span>
-        </a>
-      </div>
-      <div class="hidden md:flex space-x-8">
-        <a href="index.html" class="text-gray-700 hover:text-blue-700 font-medium">Home</a>
-        <a href="about.html" class="text-gray-700 hover:text-blue-700 font-medium">About</a>
-        <a href="ministries.html" class="text-gray-700 hover:text-blue-700 font-medium">Ministries</a>
-        <a href="gallery.html" class="text-blue-700 font-semibold">Gallery</a>
-        <a href="events.html" class="text-gray-700 hover:text-blue-700 font-medium">Events</a>
-        <a href="contact.html" class="text-gray-700 hover:text-blue-700 font-medium">Contact</a>
+  <!-- Header -->
+  <header class="bg-blue-600 text-white py-4 shadow">
+    <div class="max-w-6xl mx-auto text-center text-2xl font-bold">
+      St. Mary’s Jacobite Syrian Church - Gallery
+    </div>
+  </header>
+
+  <!-- Filters -->
+  <section class="max-w-6xl mx-auto mt-6 px-4">
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <select id="year-select" class="p-2 border rounded-lg">
+        <option>Loading...</option>
+      </select>
+
+      <div id="category-tabs" class="flex gap-2 flex-wrap">
+        <button data-category="general" class="px-3 py-1 border rounded-lg">General</button>
+        <button data-category="youth" class="px-3 py-1 border rounded-lg">Youth</button>
+        <button data-category="sundayschool" class="px-3 py-1 border rounded-lg">Sunday School</button>
+        <button data-category="vanita" class="px-3 py-1 border rounded-lg">Vanita</button>
+        <button data-category="eventwise" class="px-3 py-1 border rounded-lg">Eventwise</button>
       </div>
     </div>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<header class="relative mt-16 h-[60vh] flex items-center justify-center bg-gray-900 text-white">
-  <img src="/Home/church-bg.jpeg" alt="Church" class="absolute inset-0 w-full h-full object-cover opacity-30">
-  <div class="absolute inset-0 bg-black/30"></div>
-  <div class="relative z-10 text-center px-4 sm:px-6">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Gallery</h1>
-    <p class="mt-4 text-base sm:text-lg md:text-xl">Photos and videos from church events and activities</p>
-  </div>
-</header>
-
-<!-- Categories -->
-<section class="max-w-6xl mx-auto mt-12 px-4 sm:px-6">
-  <div class="flex flex-wrap justify-center gap-2 mb-6" id="category-tabs">
-    <button data-category="general" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700 active-tab">General</button>
-    <button data-category="youth" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Syrian Youth</button>
-    <button data-category="sundayschool" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Sunday School</button>
-    <button data-category="vanita" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Vanita Samajam</button>
-    <button data-category="eventwise" class="px-4 py-2 rounded-full border border-blue-700 text-blue-700">Event-wise</button>
-  </div>
-
-  <!-- Year Select -->
-  <div class="text-center mb-8">
-    <label for="year-select" class="mr-2 font-semibold">Year:</label>
-    <select id="year-select" class="border border-gray-300 rounded px-3 py-2">
-      <option value="2025">2025</option>
-      <option value="2024">2024</option>
-      <option value="2023">2023</option>
-    </select>
-  </div>
+  </section>
 
   <!-- Gallery Grid -->
-  <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-    <!-- Images/videos will appear here -->
+  <section class="max-w-6xl mx-auto mt-6 px-4">
+    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+    <button id="close-lightbox" class="absolute top-6 right-6 text-white text-3xl">✕</button>
+    <button id="prev-lightbox" class="absolute left-6 text-white text-3xl">❮</button>
+    <button id="next-lightbox" class="absolute right-6 text-white text-3xl">❯</button>
+    <div id="lightbox-content" class="max-w-4xl max-h-[90vh]"></div>
   </div>
-</section>
 
-<!-- Lightbox Modal -->
-<div id="lightbox" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-  <span id="close-lightbox" class="absolute top-5 right-8 text-white text-3xl cursor-pointer">&times;</span>
-  <span id="prev-btn" class="nav-btn left-5">&#10094;</span>
-  <span id="next-btn" class="nav-btn right-5">&#10095;</span>
-  <div id="lightbox-content" class="max-w-4xl max-h-[90vh]"></div>
-</div>
+  <script>
+    async function loadGallery() {
+      const res = await fetch("gallery.json");
+      const mediaData = await res.json();
 
-<!-- Footer -->
-<footer class="bg-gray-900 text-gray-300 py-6 mt-10 text-center">
-  <p>&copy; 2025 St. Mary’s Church. All Rights Reserved.</p>
-</footer>
+      const years = [...new Set(mediaData.map(m => m.year))].sort((a,b) => b - a);
+      const yearSelect = document.getElementById("year-select");
+      yearSelect.innerHTML = years.map(y => `<option value="${y}">${y}</option>`).join("");
 
-<script>
-  // Sample media data
-  const mediaData = [
-    {year:'2025', category:'general', type:'image', src:'/Gallery/2025/general/img1.jpeg'},
-    {year:'2025', category:'youth', type:'video', src:'/Gallery/2025/youth/youth1.mp4'},
-    {year:'2025', category:'sundayschool', type:'image', src:'/Gallery/2025/sundayschool/ss1.jpeg'},
-    {year:'2025', category:'vanita', type:'image', src:'/Gallery/2025/vanita/vanita1.jpeg'},
-    {year:'2025', category:'eventwise', type:'image', src:'/Gallery/2025/eventwise/event1.jpeg'},
-    {year:'2024', category:'general', type:'image', src:'/Gallery/2024/general/img2.jpeg'},
-  ];
+      const galleryGrid = document.getElementById("gallery-grid");
+      const categoryTabs = document.querySelectorAll("#category-tabs button");
 
-  const galleryGrid = document.getElementById('gallery-grid');
-  const categoryTabs = document.querySelectorAll('#category-tabs button');
-  const yearSelect = document.getElementById('year-select');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxContent = document.getElementById('lightbox-content');
-  const closeLightbox = document.getElementById('close-lightbox');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
+      let currentFiltered = [];
+      let currentIndex = 0;
 
-  let currentIndex = 0;
-  let currentFiltered = [];
+      function displayGallery(year, category) {
+        galleryGrid.innerHTML = "";
+        currentFiltered = mediaData.filter(m => m.year === year && m.category === category);
 
-  function displayGallery(year, category) {
-    galleryGrid.innerHTML = '';
-    currentFiltered = mediaData.filter(m => m.year === year && m.category === category);
-    currentFiltered.forEach((m, index) => {
-      if(m.type === 'image') {
-        galleryGrid.innerHTML += `<img src="${m.src}" class="w-full rounded-lg shadow-lg cursor-pointer" onclick="openLightbox(${index})">`;
-      } else {
-        galleryGrid.innerHTML += `<video controls class="w-full rounded-lg shadow-lg cursor-pointer" onclick="openLightbox(${index})"><source src="${m.src}" type="video/mp4"></video>`;
+        currentFiltered.forEach((m, i) => {
+          if (m.type === "image") {
+            galleryGrid.innerHTML += `<img src="${m.src}" class="w-full rounded-lg shadow-lg cursor-pointer" onclick="openLightbox(${i})">`;
+          } else {
+            galleryGrid.innerHTML += `
+              <div class="relative cursor-pointer" onclick="openLightbox(${i})">
+                <video class="w-full rounded-lg shadow-lg" preload="metadata">
+                  <source src="${m.src}#t=0.5" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-3xl">▶</div>
+              </div>`;
+          }
+        });
       }
-    });
-  }
 
-  function openLightbox(index) {
-    currentIndex = index;
-    showMedia();
-    lightbox.classList.remove('hidden');
-  }
+      // ✅ Default view: latest year + general
+      const defaultYear = years[0];
+      yearSelect.value = defaultYear;
+      const defaultCategory = "general";
+      categoryTabs.forEach(tab => {
+        if (tab.dataset.category === defaultCategory) {
+          tab.classList.add("active-tab");
+        } else {
+          tab.classList.remove("active-tab");
+        }
+      });
+      displayGallery(defaultYear, defaultCategory);
 
-  function showMedia() {
-    const media = currentFiltered[currentIndex];
-    if(media.type === 'image') {
-      lightboxContent.innerHTML = `<img src="${media.src}" class="max-h-[90vh] mx-auto rounded-lg shadow-lg">`;
-    } else {
-      lightboxContent.innerHTML = `<video controls autoplay class="max-h-[90vh] mx-auto rounded-lg shadow-lg"><source src="${media.src}" type="video/mp4"></video>`;
+      // Events
+      categoryTabs.forEach(tab => tab.addEventListener("click", () => {
+        categoryTabs.forEach(t => t.classList.remove("active-tab"));
+        tab.classList.add("active-tab");
+        displayGallery(yearSelect.value, tab.dataset.category);
+      }));
+
+      yearSelect.addEventListener("change", () => {
+        const activeTab = document.querySelector("#category-tabs button.active-tab");
+        displayGallery(yearSelect.value, activeTab.dataset.category);
+      });
+
+      // Lightbox
+      window.openLightbox = function(index) {
+        currentIndex = index;
+        const m = currentFiltered[index];
+        const lightbox = document.getElementById("lightbox");
+        const content = document.getElementById("lightbox-content");
+        lightbox.classList.remove("hidden");
+        content.innerHTML = m.type === "image" 
+          ? `<img src="${m.src}" class="max-h-[90vh] mx-auto rounded-lg">`
+          : `<video src="${m.src}" class="max-h-[90vh] mx-auto rounded-lg" controls autoplay></video>`;
+      };
+
+      document.getElementById("close-lightbox").onclick = () => {
+        document.getElementById("lightbox").classList.add("hidden");
+        document.getElementById("lightbox-content").innerHTML = "";
+      };
+
+      document.getElementById("prev-lightbox").onclick = () => {
+        if (currentFiltered.length) {
+          currentIndex = (currentIndex - 1 + currentFiltered.length) % currentFiltered.length;
+          openLightbox(currentIndex);
+        }
+      };
+
+      document.getElementById("next-lightbox").onclick = () => {
+        if (currentFiltered.length) {
+          currentIndex = (currentIndex + 1) % currentFiltered.length;
+          openLightbox(currentIndex);
+        }
+      };
     }
-  }
 
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + currentFiltered.length) % currentFiltered.length;
-    showMedia();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % currentFiltered.length;
-    showMedia();
-  });
-
-  closeLightbox.addEventListener('click', () => {
-    lightbox.classList.add('hidden');
-    lightboxContent.innerHTML = '';
-  });
-
-  lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox) {
-      lightbox.classList.add('hidden');
-      lightboxContent.innerHTML = '';
-    }
-  });
-
-  // Tab click
-  categoryTabs.forEach(tab => tab.addEventListener('click', () => {
-    categoryTabs.forEach(t => t.classList.remove('active-tab'));
-    tab.classList.add('active-tab');
-    displayGallery(yearSelect.value, tab.dataset.category);
-  }));
-
-  // Year change
-  yearSelect.addEventListener('change', () => {
-    const activeTab = document.querySelector('#category-tabs button.active-tab');
-    displayGallery(yearSelect.value, activeTab.dataset.category);
-  });
-
-  // Initialize
-  displayGallery('2025', 'general');
-</script>
+    loadGallery();
+  </script>
 </body>
 </html>
