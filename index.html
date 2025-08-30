@@ -24,9 +24,7 @@
   <!-- Filters -->
   <section class="max-w-6xl mx-auto mt-6 px-4">
     <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-      <select id="year-select" class="p-2 border rounded-lg">
-        <option>Loading...</option>
-      </select>
+      <select id="year-select" class="p-2 border rounded-lg"></select>
 
       <div id="category-tabs" class="flex gap-2 flex-wrap">
         <button data-category="general" class="px-3 py-1 border rounded-lg">General</button>
@@ -52,9 +50,16 @@
   </div>
 
   <script>
-    async function loadGallery() {
-      const res = await fetch("gallery.json");
-      const mediaData = await res.json();
+    function loadGallery() {
+      // ✅ Direct static gallery data (replace with your own image/video links)
+      const mediaData = [
+        { year: 2025, category: "general", type: "image", src: "2025-General-img1.jpg" },
+        { year: 2025, category: "general", type: "video", src: "videos/general1.mp4" },
+        { year: 2024, category: "youth", type: "image", src: "images/youth1.jpg" },
+        { year: 2024, category: "sundayschool", type: "image", src: "images/sunday1.jpg" },
+        { year: 2023, category: "vanita", type: "image", src: "images/vanita1.jpg" },
+        { year: 2023, category: "eventwise", type: "video", src: "videos/event1.mp4" }
+      ];
 
       const years = [...new Set(mediaData.map(m => m.year))].sort((a,b) => b - a);
       const yearSelect = document.getElementById("year-select");
@@ -68,7 +73,7 @@
 
       function displayGallery(year, category) {
         galleryGrid.innerHTML = "";
-        currentFiltered = mediaData.filter(m => m.year === year && m.category === category);
+        currentFiltered = mediaData.filter(m => m.year == year && m.category === category);
 
         currentFiltered.forEach((m, i) => {
           if (m.type === "image") {
